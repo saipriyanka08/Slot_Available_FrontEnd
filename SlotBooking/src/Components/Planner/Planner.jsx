@@ -21,12 +21,21 @@ class Planner extends Component {
         window.location.href='./schedule'
       }
       var someDate = new Date();
-someDate.setDate(someDate.getDate()+5); 
+someDate.setDate(someDate.getDate()+4); 
 if((someDate.getMonth()+1)<10)
       var month="0"+(someDate.getMonth()+1)
     else
-    var month=someDate.getMonth+1
-    var EndDate=someDate.getFullYear()+"-"+(month)+'-'+someDate.getDate()
+    var month=someDate.getMonth()+1
+    if(someDate.getDate()<10)
+    {
+      var Day="0"+someDate.getDate()
+    }
+    else
+    {
+      var Day=someDate.getDate()
+
+    }
+    var EndDate=someDate.getFullYear()+"-"+(month)+'-'+Day
   console.log(EndDate)
   this.setState({EndTime:EndDate})
 

@@ -89,7 +89,19 @@ export class Login extends Component {
     
     redirect()
     {
-        
+        var Is_Admin=localStorage.getItem("Admin")
+            
+        if(Is_Admin)
+        {
+            localStorage.setItem("Admin",true)
+            window.location.href='./plan'
+
+        }
+        else
+        {
+            localStorage.setItem("Admin",false)
+            window.location.href='./schedule'
+        }
     }
 
     render() {

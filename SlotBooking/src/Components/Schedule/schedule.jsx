@@ -26,7 +26,7 @@ class schedule extends Component {
       if((someDate.getMonth()+1)<10)
       var month="0"+(someDate.getMonth()+1)
     else
-      var month=someDate.getMonth+1
+      var month=someDate.getMonth()+1
     var EndDate=[]
     EndDate.push(someDate.getFullYear()+"-"+(month)+'-'+someDate.getDate())
     someDate = new Date();
@@ -34,7 +34,7 @@ class schedule extends Component {
       if((someDate.getMonth()+1)<10)
       var month="0"+(someDate.getMonth()+1)
     else
-      var month=someDate.getMonth+1
+      var month=someDate.getMonth()+1
  
     EndDate.push(someDate.getFullYear()+"-"+(month)+'-'+someDate.getDate())
     someDate = new Date();
@@ -42,7 +42,7 @@ class schedule extends Component {
       if((someDate.getMonth()+1)<10)
       var month="0"+(someDate.getMonth()+1)
     else
-      var month=someDate.getMonth+1
+      var month=someDate.getMonth()+1
  
     EndDate.push(someDate.getFullYear()+"-"+(month)+'-'+someDate.getDate())
     someDate = new Date();
@@ -50,7 +50,7 @@ class schedule extends Component {
       if((someDate.getMonth()+1)<10)
       var month="0"+(someDate.getMonth()+1)
     else
-      var month=someDate.getMonth+1
+      var month=someDate.getMonth()+1
 
     EndDate.push(someDate.getFullYear()+"-"+(month)+'-'+someDate.getDate())
 
@@ -67,11 +67,12 @@ class schedule extends Component {
         var date2=EndDate[2].split('-')
         date2=date2[2]+'-'+date2[1]+'-'+date2[0]
         var date3=EndDate[3].split('-')
-        
+        console.log(EndDate[3])
+        date3=date3[2]+'-'+date3[1]+'-'+date3[0]
         Title[2]=date1
         Title[2]=date1
         Title[3]=date2
-        Title[4]=parseInt(date+4)+'-'+month+'-'+year
+        Title[4]=date3
         this.setState({Title:Title})
         this.GetData()
     }
@@ -81,35 +82,48 @@ async GetData(){
   if((someDate.getMonth()+1)<10)
   var month="0"+(someDate.getMonth()+1)
 else
-  var month=someDate.getMonth+1
+  var month=someDate.getMonth()+1
 var EndDate=[]
-EndDate.push(someDate.getFullYear()+"-"+(month)+'-'+someDate.getDate())
+var date1=someDate.getDate()
+if(date1<10)
+date1="0"+date1
+EndDate.push(someDate.getFullYear()+"-"+(month)+'-'+date1)
 someDate = new Date();
   someDate.setDate(someDate.getDate()+2); 
+  var date1=someDate.getDate()
+  if(date1<10)
+  date1="0"+date1
   if((someDate.getMonth()+1)<10)
   var month="0"+(someDate.getMonth()+1)
 else
-  var month=someDate.getMonth+1
+  var month=someDate.getMonth()+1
 
-EndDate.push(someDate.getFullYear()+"-"+(month)+'-'+someDate.getDate())
+EndDate.push(someDate.getFullYear()+"-"+(month)+'-'+date1)
 someDate = new Date();
   someDate.setDate(someDate.getDate()+3); 
   if((someDate.getMonth()+1)<10)
   var month="0"+(someDate.getMonth()+1)
 else
-  var month=someDate.getMonth+1
-
-EndDate.push(someDate.getFullYear()+"-"+(month)+'-'+someDate.getDate())
+  var month=someDate.getMonth()+1
+  var date1=someDate.getDate()
+  if(date1<10)
+  date1="0"+date1
+EndDate.push(someDate.getFullYear()+"-"+(month)+'-'+date1)
 someDate = new Date();
   someDate.setDate(someDate.getDate()+4); 
+  console.log(someDate)
   if((someDate.getMonth()+1)<10)
   var month="0"+(someDate.getMonth()+1)
 else
-  var month=someDate.getMonth+1
+  var month=someDate.getMonth()+1
+  var date1=someDate.getDate()
+  if(date1<10)
+  date1="0"+date1
+EndDate.push(someDate.getFullYear()+"-"+(month)+'-'+date1)
 
-EndDate.push(someDate.getFullYear()+"-"+(month)+'-'+someDate.getDate())
   var Data=await axios.get(this.state.EndPoint+'createslot')
   Data=(Data.data)
+  console.log(Data)
   var itr;
   var T,T1,T2,T3,T4
   var s=0, s1=0, s2=0, s3=0, s4=0
@@ -146,7 +160,7 @@ EndDate.push(someDate.getFullYear()+"-"+(month)+'-'+someDate.getDate())
         }
             if(Time<12)
             MD1.push(Data[itr])
-            else if(Time<18 &&Time>12)
+            else if(Time<18 &&Time>=12)
             AD1.push(Data[itr])
             else
             ED1.push(Data[itr])
@@ -160,7 +174,7 @@ EndDate.push(someDate.getFullYear()+"-"+(month)+'-'+someDate.getDate())
   
         if(Time<12)
           MD2.push(Data[itr])
-        else if(Time<18 &&Time>12)
+        else if(Time<18 &&Time>=12)
           AD2.push(Data[itr])
         else
           ED2.push(Data[itr])
@@ -174,7 +188,7 @@ EndDate.push(someDate.getFullYear()+"-"+(month)+'-'+someDate.getDate())
         }
         if(Time<12)
         MD3.push(Data[itr])
-        else if(Time<18 &&Time>12) 
+        else if(Time<18 &&Time>=12) 
         AD3.push(Data[itr])
         else
         ED3.push(Data[itr])
@@ -187,7 +201,7 @@ EndDate.push(someDate.getFullYear()+"-"+(month)+'-'+someDate.getDate())
         }
         if(Time<12)
         MD4.push(Data[itr])
-        else if(Time<18 &&Time>12)
+        else if(Time<18 &&Time>=12)
         AD4.push(Data[itr])
         else
         ED4.push(Data[itr])
@@ -202,7 +216,7 @@ EndDate.push(someDate.getFullYear()+"-"+(month)+'-'+someDate.getDate())
         {
          MD.push(Data[itr])
         }
-        else if(Time<18 && Time>12)
+        else if(Time<18 && Time>=12)
         {
          AD.push(Data[itr])
         }
